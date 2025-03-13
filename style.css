@@ -1,0 +1,213 @@
+/* === 全域重置樣式，避免預設 margin 和 padding 影響 === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* === 設定頁面主體 === */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* 讓內容至少填滿整個視窗高度 */
+}
+
+/* === 上方導航欄（保留原有設計） === */
+header {
+    background-color: rgba(43, 21, 13, 0.916);
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px; /* 控制左右內距 */
+}
+
+/* 設定標題樣式 */
+header h1 {
+    color: white;
+}
+
+/* 導覽列設定 */
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px; /* 控制選單間距 */
+}
+
+header nav li {
+    display: inline;
+}
+
+/* 導覽列連結樣式 */
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* === 左側風險評估選單（側邊欄） === */
+.sidebar {
+    width: 280px;
+    background-color: #f8f8f8;
+    position: fixed;
+    left: 0;
+    top: 80px; /* 避免被 header 遮住 */
+    bottom: 0;
+    padding-top: 20px;
+    transition: width 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+
+/* 當側邊欄收合時 */
+.sidebar.collapsed {
+    width: 60px;
+    overflow: hidden; /*隱藏內容*/
+}
+
+/* 側邊欄內的列表樣式 */
+.sidebar ul {
+    list-style: none;
+    padding: 5px;
+}
+
+/* 收合時隱藏所有選單內容 */
+.sidebar.collapsed ul {
+    display: none;
+}
+
+/* 側邊欄連結樣式 */
+.sidebar a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: 1.2rem;
+    padding: 20px;
+    transition: background 0.3s;
+}
+
+/* 讓 icon 靠左，文字靠右 */
+.sidebar a i {
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+/* 滑鼠懸停時 */
+.sidebar a:hover {
+    background-color: #c4c4c4;
+}
+
+/* 收合按鈕 */
+.sidebar-toggle {
+    position: absolute;
+    right: -10px;
+    top: 40%;
+    background-color: #f8b400;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+}
+
+/* 收合時按鈕靠左，且置中 */
+.sidebar.collapsed .sidebar-toggle {
+    right: 5px;
+    width: 50px;
+    text-align: center;
+}
+
+/* 主要內容區域調整，讓 margin-left 跟著變化 */
+.content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar.collapsed ~ .content {
+    margin-left: 50px;
+}
+
+/* === 主要內容區域 === */
+.content {
+    margin-left: 250px; /* 讓內容不被側邊欄擋住 */
+    flex: 1;
+    padding: 100px 20px 20px; /* 控制間距，避免 header 遮擋 */
+}
+
+/* === 乾旱介紹區塊 === */
+.new1 {
+    background-image: url("images/乾旱.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.new1 h2 {
+    font-size: 50px;
+}
+
+.new1 p {
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    padding: 10px;
+}
+
+/* === 圖文區塊 === */
+.slogan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    gap: 30px;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* === 修正 footer === */
+footer {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer ul {
+    display: flex;
+    justify-content: space-around; /* 讓連結平均分配 */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    flex: 1; /* 讓連結平均分布 */
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

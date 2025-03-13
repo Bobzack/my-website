@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基礎旱災風險呈現</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.31/"></script>
+    <link rel="stylesheet" href="Reload.css">
+</head>
+<!--頁面內容部分-->
+<body>
+<!--頁面導覽列-->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-text">澎湖風險呈現</span>
+        </div>
+        <nav class="nav-links">
+                    <a href="主頁.html">回主頁</a>
+                    <a href="第二個連結.html">旱災風險與經濟</a>
+                    <a href="第三個連結.html">旱災風險與人口老化</a>
+                    <a href="第四個連結.html">旱災風險與供水能力</a>
+                    <a href="其他.html">其他資源</a>
+        </nav>
+        <a href="https://drive.google.com/drive/folders/1C3yvThKDxP3BvsNx8tkFhQeekA1luR8Z?usp=sharing">參考資料</a>
+    </header>
+<!--主要內容區域-->
+    <main>
+        <section class="map-container">
+            <h1>氣候變遷下！旱災災害潛勢及風險評估</h1>
+            <div class="map-wrapper">
+                <div id="mapContainer1" class="map-box"></div>
+                <div id="mapContainer2" class="map-box"></div>
+            </div>        
+        </section>
+<!--切換地圖按鈕區域-->
+        <nav class="layer-navbar">
+            <span class="layer-label">切換右側地圖：</span>
+            <button onclick="changeLayer(1)">情境 1</button>
+            <button onclick="changeLayer(2)">情境 2</button>
+            <button onclick="changeLayer(3)">情境 3</button>
+            <button onclick="changeLayer(4)">情境 4</button>
+            <button onclick="changeLayer(5)">情境 5</button>
+            <button class="reset-btn" onclick="resetLayer()">回到預設</button> 
+        </nav>
+        <section class="text-section">
+            <h2>這邊會說明我們的研究算法</h2>
+            <p>本研究...</p>
+        </section>
+    </main>
+
+<!-- JavaScript 載入 ArcGIS 地圖 -->
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/FeatureLayer"
+], function(Map, MapView, FeatureLayer) {
+
+    var map1 = new Map({ basemap: "topo-vector" });
+    var map2 = new Map({ basemap: "topo-vector" });
+
+    var view1 = new MapView({
+        container: "mapContainer1",
+        map: map1,
+        center: [119.5664, 23.5659], 
+        zoom: 11
+    });
+
+    var view2 = new MapView({
+        container: "mapContainer2",
+        map: map2,
+        center: [119.5664, 23.5659], 
+        zoom: 11
+    });
+
+    var defaultLayer1 = new FeatureLayer({
+        url: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/%E6%97%B1%E7%81%BD%E6%95%B8%E6%93%9A(%E6%B8%AC%E8%A9%A6)/FeatureServer"
+    });
+
+    var defaultLayer2 = new FeatureLayer({
+        url: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_1/FeatureServer"
+    });
+
+    map1.add(defaultLayer1);
+    map2.add(defaultLayer2);
+
+    // ✅ 防止無限迴圈同步的狀態鎖
+    var isSyncing = false;
+
+    function syncViews(sourceView, targetView) {
+        if (isSyncing) return;
+        isSyncing = true;
+
+        targetView.center = sourceView.center;
+        targetView.zoom = sourceView.zoom;
+
+        setTimeout(() => { isSyncing = false; }, 1);
+    }
+
+    // ✅ 雙向同步地圖移動 & 縮放
+    view1.watch("center", function() { syncViews(view1, view2); });
+    view1.watch("zoom", function() { syncViews(view1, view2); });
+
+    view2.watch("center", function() { syncViews(view2, view1); });
+    view2.watch("zoom", function() { syncViews(view2, view1); });
+
+    var scenarioURLs = {
+        1: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_1/FeatureServer",
+        2: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_2/FeatureServer",
+        3: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_3/FeatureServer",
+        4: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_4/FeatureServer",
+        5: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_5/FeatureServer"
+    };
+
+    window.changeLayer = function(scenarioNumber) {
+        if (scenarioURLs[scenarioNumber]) {
+            map2.removeAll(); // ✅ 修正 removeAllLayers() 錯誤
+
+            var newLayer = new FeatureLayer({
+                url: scenarioURLs[scenarioNumber]
+            });
+
+            map2.add(newLayer);
+        } else {
+            alert("該情境數據未提供！");
+        }
+    };
+
+    window.resetLayer = function() {
+        map2.removeAll();
+        map2.add(defaultLayer2);
+    };
+});
+</script>
+
+</body>
+
+</html>

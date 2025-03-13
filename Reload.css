@@ -1,0 +1,169 @@
+/* 頁面初始化 */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* 頁首樣式 */
+.navbar {
+    background-color: rgba(97, 48, 30, 0.85);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    color: white;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 25px;
+    font-size: 20px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+.data-btn {
+    color: white;
+    background-color: #555;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.data-btn:hover {
+    background-color: #777;
+}
+
+/* 地圖區塊 */
+.map-container {
+    background-color: rgb(255, 242, 225);
+    padding: 10px;
+    text-align: center;
+}
+
+.map-container h1 {
+    font-size: 34px;
+    color: #000000; /* 深紅色，對比更好 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.map-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* 增加間距 */
+    width: 90%;
+    margin: 0 auto;
+}
+
+.map-box {
+    width: 49%;
+    height: 550px;
+    border: 1px solid #ccc;
+}
+/* 文字區塊 */
+.text-section {
+    padding: 40px;
+    text-align: center;
+}
+
+.text-section h2 {
+    font-size: 28px;
+    color: black;
+}
+
+.text-section p {
+    font-size: 20px;
+    color: black;
+    max-width: 800px;
+    margin: auto;
+    line-height: 1.8;
+}
+
+/* 圖層切換導航列 */
+.layer-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+/* 按鈕樣式 */
+.layer-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+.layer-navbar button {
+    padding: 8px 18px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 2px solid #0056b3;
+    color: white;
+    background: linear-gradient(to right, #007BFF, #0056b3);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 5px; /* 增加按鈕之間的距離 */
+}
+
+.layer-navbar button:hover {
+    background: linear-gradient(to right, #0056b3, #003f7f);
+    border-color: #003f7f;
+    transform: scale(1.05);
+}
+
+/* 「回到預設」按鈕樣式 */
+.reset-btn {
+    background: linear-gradient(to right, #28a745, #218838);
+    border-color: #218838;
+}
+
+.reset-btn:hover {
+    background: linear-gradient(to right, #218838, #19692c);
+    border-color: #19692c;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .layer-navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .layer-navbar button {
+        width: 80%; /* 讓按鈕在小螢幕更寬 */
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links a {
+        margin: 5px 0;
+    }
+
+    .map-container {
+        padding: 20px;
+    }
+}

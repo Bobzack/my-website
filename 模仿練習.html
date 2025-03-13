@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基礎旱災風險呈現</title>
+    <link rel="stylesheet" href="other_style.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.31/"></script>
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-text">PengHu風險呈現</span>
+        </div>
+        <nav class="nav-links">
+            <a href="主頁.html">回主頁</a>
+            <a href="第二個連結.html">旱災風險與經濟</a>
+            <a href="第三個連結.html">旱災風險與人口老化</a>
+            <a href="第四個連結.html">旱災風險與供水能力</a>
+            <a href="其他.html">其他資源</a>
+        </nav>
+        <a href="#" class="reservation-btn">Reservation →</a>
+    </header>
+    <main>
+        <section class="map_output">
+            <h1>旱災風險呈現</h1>
+            <div id="mapContainer"></div>
+        </section>
+
+        <section class="word_explain">
+
+        </section>
+    </main>
+
+    <script>
+        require([
+          "esri/Map",
+          "esri/views/MapView",
+          "esri/layers/FeatureLayer"
+        ], function(Map, MapView, FeatureLayer) {
+      
+          // 建立地圖
+          var map = new Map({
+            basemap: "topo-vector"  // 使用地形底圖
+          });
+      
+          // 建立 MapView，將地圖放入 mapContainer
+          var view = new MapView({
+            container: "mapContainer",  // 綁定到 HTML 的 div
+            map: map,
+            center: [120.9, 23.5], // 台灣經緯度
+            zoom: 7 // 地圖縮放等級
+          });
+      
+          // 加入旱災風險的 ArcGIS FeatureLayer
+          var droughtRiskLayer = new FeatureLayer({
+            url: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/%E6%97%B1%E7%81%BD%E6%95%B8%E6%93%9A(%E6%B8%AC%E8%A9%A6)/FeatureServer" // 
+          });
+      
+          // 把風險圖層加到地圖上
+          map.add(droughtRiskLayer);
+      
+        });
+      </script>
+</body>
+
+</html>

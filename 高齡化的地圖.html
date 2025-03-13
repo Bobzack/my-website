@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基礎旱災風險呈現</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.31/"></script>
+    <link rel="stylesheet" href="Reload.css">
+</head>
+<!--頁面內容部分-->
+<body>
+<!--頁面導覽列-->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-text">澎湖風險呈現</span>
+        </div>
+        <nav class="nav-links">
+                    <a href="主頁.html">回主頁</a>
+                    <a href="第二個連結.html">旱災風險與經濟</a>
+                    <a href="第三個連結.html">旱災風險與人口老化</a>
+                    <a href="第四個連結.html">旱災風險與供水能力</a>
+                    <a href="其他.html">其他資源</a>
+        </nav>
+        <a href="https://drive.google.com/drive/folders/1C3yvThKDxP3BvsNx8tkFhQeekA1luR8Z?usp=sharing">參考資料</a>
+    </header>
+<!--主要內容區域-->
+    <main>
+        <section class="map-container">
+            <h1>高齡化日益嚴重的未來 <br> 旱災災害潛勢及風險評估</h1>
+            <div id="mapContainer"></div>
+        </section>
+        <nav class="layer-navbar">
+            <button onclick="changeLayer(1)">情境 1</button>
+            <button onclick="changeLayer(2)">情境 2</button>
+            <button onclick="changeLayer(3)">情境 3</button>
+            <button onclick="changeLayer(4)">情境 4</button>
+            <button onclick="changeLayer(5)">情境 5</button>
+            <button onclick="resetLayer()">回到預設</button> 
+        </nav>
+        <section class="text-section">
+            <h2>這邊會說明我們的研究算法</h2>
+            <p>本研究...</p>
+        </section>
+    </main>
+
+<!-- JavaScript 載入 ArcGIS 地圖 -->
+<script>
+require([
+  "esri/Map",
+  "esri/views/MapView",
+  "esri/layers/FeatureLayer"
+], function(Map, MapView, FeatureLayer) {
+
+    var map = new Map({
+        basemap: "topo-vector"
+    });
+
+    var view = new MapView({
+        container: "mapContainer",
+        map: map,
+        center: [119.5664, 23.5659], // 澎湖縣經緯度
+        zoom: 10
+    });
+
+    // ✅ 預設顯示「旱災數據 (測試)」
+    var defaultLayer = new FeatureLayer({
+        url: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/%E6%97%B1%E7%81%BD%E6%95%B8%E6%93%9A(%E6%B8%AC%E8%A9%A6)/FeatureServer"
+    });
+
+    var currentLayer = defaultLayer; // 預設圖層
+    map.add(currentLayer);
+
+    // ✅ 圖層對應的 URL 列表
+    var scenarioURLs = {
+        1: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_1/FeatureServer",
+        2: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_2/FeatureServer",
+        3: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_3/FeatureServer",
+        4: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_4/FeatureServer",
+        5: "https://services.arcgis.com/UopYU5ZgwPIJ4jb6/arcgis/rest/services/Scenario_5/FeatureServer"
+    };
+
+    // ✅ 切換圖層的函式
+    window.changeLayer = function(scenarioNumber) {
+        if (scenarioURLs[scenarioNumber]) {
+            map.remove(currentLayer);
+
+            currentLayer = new FeatureLayer({
+                url: scenarioURLs[scenarioNumber]
+            });
+
+            map.add(currentLayer);
+        } else {
+            alert("該情境數據未提供！");
+        }
+    };
+
+    // ✅ 回到預設圖層
+    window.resetLayer = function() {
+        map.remove(currentLayer);
+        currentLayer = defaultLayer;
+        map.add(currentLayer);
+    };
+});
+</script>
+
+</body>
+
+</html>

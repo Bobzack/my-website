@@ -1,0 +1,107 @@
+/* === 全域樣式重置 === */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* === 頁首導覽列 === */
+.navbar {
+    background-color: rgba(97, 48, 30, 0.85);
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 20px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* === 主要內容區塊 === */
+.content {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: rgb(255, 242, 225); /* 溫暖背景 */
+}
+
+/* 文字區塊 */
+.text-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-size: 20px;
+    line-height: 1.8;
+    color: black;
+}
+
+/* === 按鈕樣式 === */
+.custom-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(to right, #007BFF, #0056b3);
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+}
+
+/* 按鈕 hover 效果 */
+.custom-btn:hover {
+    background: linear-gradient(to right, #0056b3, #003f7f);
+    transform: scale(1.05);
+}
+
+/* === 圖片區塊 === */
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.image-container img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* === 響應式調整 === */
+@media (max-width: 768px) {
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links a {
+        margin: 5px 0;
+    }
+
+    .content {
+        padding: 30px 10px;
+    }
+
+    .text-section {
+        font-size: 18px;
+    }
+}
