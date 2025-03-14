@@ -6,13 +6,14 @@
     <title>旱災災害風險平台</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+
     <!-- 上方導航欄（保持原有） -->
     <header>
         <h1>旱災災害風險平台</h1>
         <nav>
             <ul>
+                <li><a href="第一個連結.html">風險呈現</a></li>
                 <li><a href="第二個連結.html">經濟與風險</a></li>
                 <li><a href="第三個連結.html">高齡化與風險</a></li>
                 <li><a href="第四個連結.html">供水能力與風險</a></li>
@@ -21,23 +22,25 @@
         </nav>
     </header>
 
-<!-- 左側風險評估選單 -->
-<nav class="sidebar">
-    <span class="sidebar-toggle">收合</span> 
-    <ul>
-        <li><a href="一般地圖.html"><i class="fas fa-map"></i> <span>澎湖縣乾旱風險地圖</span></a></li> 
-        <li><a href="人口改變的地圖.html"><i class="fas fa-users"></i> <span>人口結構改變的風險地圖</span></a></li>
-        <li><a href="經濟的地圖.html"><i class="fas fa-chart-line"></i> <span>經濟條件改變的風險地圖</span></a></li>
-        <li><a href="高齡化的地圖.html"><i class="fas fa-user-friends"></i> <span>高齡化情境下的風險地圖</span></a></li>
-        <li><a href="供水能力的地圖.html"><i class="fas fa-tint"></i> <span>供水能力改變的風險地圖</span></a></li>
-    </ul>
-</nav>
+    <!-- 左側風險評估選單 -->
+    <nav class="sidebar">
+        <span class="sidebar-toggle" onclick="toggleSidebar()">❮ 收合</span>
+        <ul>
+            <li><a href="#">災害風險簡介</a></li>
+            <li><a href="#">淹水災害</a></li>
+            <li><a href="#">坡地災害</a></li>
+            <li><a href="#">乾旱災害</a></li>
+            <li><a href="#">海岸災害</a></li>
+            <li><a href="#">災害風險圖歷程</a></li>
+        </ul>
+    </nav>
 
     <!-- 主要內容區 -->
     <div class="content">
         <section class="new1">
             <h2>什麼是旱災</h2>
             <p>乾旱是指一段時期異常偏乾,也就是和氣候平均狀態相比雨量異常偏少,因此而導致的災害則稱為旱災</p>
+            <p><a href="#">了解更多</a></p>
         </section>
 
         <section class="slogan">
@@ -68,6 +71,16 @@
     </footer>
 
     <!-- JavaScript 控制側邊欄收合 -->
-    <script src="sidebar.js"></script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar.style.width === "250px") {
+                sidebar.style.width = "50px";
+            } else {
+                sidebar.style.width = "250px";
+            }
+        }
+    </script>
+
 </body>
 </html>

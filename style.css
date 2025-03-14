@@ -55,87 +55,54 @@ header nav a:hover {
 
 /* === 左側風險評估選單（側邊欄） === */
 .sidebar {
-    width: 280px;
+    width: 250px;
     background-color: #f8f8f8;
     position: fixed;
     left: 0;
-    top: 80px; /* 避免被 header 遮住 */
+    top: 80px; /* 讓它不會被 header 擋住 */
     bottom: 0;
     padding-top: 20px;
     transition: width 0.3s ease-in-out;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-}
-
-
-/* 當側邊欄收合時 */
-.sidebar.collapsed {
-    width: 60px;
-    overflow: hidden; /*隱藏內容*/
+    overflow: hidden; /* 確保內容不超出範圍 */
 }
 
 /* 側邊欄內的列表樣式 */
 .sidebar ul {
     list-style: none;
-    padding: 5px;
+    padding: 0;
 }
 
-/* 收合時隱藏所有選單內容 */
-.sidebar.collapsed ul {
-    display: none;
+.sidebar li {
+    padding: 10px;
 }
 
 /* 側邊欄連結樣式 */
 .sidebar a {
-    display: flex;
-    align-items: center;
+    display: block;
     text-decoration: none;
     color: black;
     font-size: 1.2rem;
-    padding: 20px;
+    padding: 10px 20px;
     transition: background 0.3s;
 }
 
-/* 讓 icon 靠左，文字靠右 */
-.sidebar a i {
-    font-size: 15px;
-    margin-right: 10px;
-}
-
-/* 滑鼠懸停時 */
+/* 滑鼠懸停時的變化 */
 .sidebar a:hover {
-    background-color: #c4c4c4;
+    background-color: #ddd;
 }
 
-/* 收合按鈕 */
+/* 側邊欄收合按鈕 */
 .sidebar-toggle {
     position: absolute;
-    right: -10px;
+    right: -5px;
     top: 40%;
     background-color: #f8b400;
     color: white;
-    padding: 15px;
+    padding: 5px 15px;
     border-radius: 5px;
     cursor: pointer;
-    transform: translateY(-50%);
-    transition: all 0.3s ease;
-}
-
-/* 收合時按鈕靠左，且置中 */
-.sidebar.collapsed .sidebar-toggle {
-    right: 5px;
-    width: 50px;
-    text-align: center;
-}
-
-/* 主要內容區域調整，讓 margin-left 跟著變化 */
-.content {
-    margin-left: 250px;
-    transition: margin-left 0.3s ease-in-out;
-}
-
-.sidebar.collapsed ~ .content {
-    margin-left: 50px;
+    transform: translateY(-10%);
 }
 
 /* === 主要內容區域 === */
